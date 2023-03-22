@@ -66,7 +66,7 @@ async fn update() {}
 async fn delete() {
     let uuid = std::env::args().nth(2).expect("No uuid given");
     let client = reqwest::Client::new();
-    let resp = client
+    let _resp = client
         .delete(format!("http://localhost:3000/scripts/{uuid}"))
         .send()
         .await;
