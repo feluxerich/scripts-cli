@@ -47,7 +47,17 @@ async fn create() {
     println!("Successful");
 }
 
-async fn list() {}
+async fn list() {
+    let client = reqwest::Client::new();
+    let resp = client
+        .get("http://localhost:3000/scripts")
+        .send()
+        .await
+        .expect("msg")
+        .json::<serde_json::Value>()
+        .await;
+    println!("{:#?}", resp);
+}
 
 async fn find() {}
 
