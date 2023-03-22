@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::fmt::format;
 use std::path::Path;
 
 #[tokio::main]
@@ -53,7 +54,7 @@ async fn list() {
         .get("http://localhost:3000/scripts")
         .send()
         .await
-        .expect("msg")
+        .expect("")
         .json::<serde_json::Value>()
         .await;
     println!("{:#?}", resp);
@@ -63,4 +64,12 @@ async fn find() {}
 
 async fn update() {}
 
-async fn delete() {}
+async fn delete() {
+    let uuid = std::env::args().nth(2).expect("No uuid given");
+    let client = reqwest::Client::new();
+    let resp = client
+        .delete(format!("http://localhost:3000/scripts/{uuid}"))
+        .send()
+        .await;
+    println!("Deleted");
+}
