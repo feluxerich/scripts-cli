@@ -29,7 +29,7 @@ async fn create() {
     create_script_dto.insert("filename", path.file_name().unwrap().to_str());
     create_script_dto.insert("content", Some(content.as_str()));
     if description_arg.is_some() {
-        description = std::env::args().nth(3).unwrap();
+        description = std::env::args().nth(3).unwrap(); // FIXME: unpack every last argument or make it available by --description or something
         create_script_dto.insert("description", Some(description.as_str()));
     }
 
